@@ -14,7 +14,13 @@ def download_prolog():
     remote = FtpTarget(path_config.ftp_remotepath, path_config.ftp_server, username=path_config.ftp_username, password=path_config.ftp_password)
     opts = {"resolve": "skip", "verbose": 1}
 
-    s = DownloadSynchronizer(local, remote, opts) # 下载ftp日志文件夹
-    s.run()
+    try:
+        s = DownloadSynchronizer(local, remote, opts)  # 下载ftp日志文件夹
+        s.run()
 
-    return localpath
+    except SyntaxError:
+        pass
+
+#    return localpath  # 返回本地保存的ftp目录
+
+# download_prolog()
